@@ -1,12 +1,43 @@
+body {
+  text-align: center;
+  color: white;
+}
+
 button {
-  width: 50px;
-  height: 40px;
-  font-size: 20px;
-  background-color: white;
+  width: 60px;
+  height: 60px;
+  font-size: 26px;
+  color: white;
+  border: none;
   outline: none;
+  background-color: #353235;
+  border-radius: 50%;
 }
 
 .wrapp {
-  display: flex;
-  justify-content: center;
+  display: inline-block;
+  position: relative;
+  background-color: black;
+  border: 3px solid #929292;
+  border-radius: 25px;
+  overflow: hidden;
+  padding: 10px;
+  box-shadow: 5px 10px 8px #888888;
+
+  .resultDisplay {
+    display: block;
+    height: 185px;
+    line-height: 80px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    background-color: black;
+
+    .result {
+      display: flex;
+      font-size: 55px;
+      align-content: right;
+      justify-content: flex-end;
+      padding-top: 100px;
+    }
+  }
 }
