@@ -1,65 +1,96 @@
 
 import React from 'react';
-import KeyPadComponent from "./components/keypad";
+import KeyPad from "./components/keypad";
 import styles from './styles.module.scss';
 
+const formatNumber = number => String(number).replace('.', ',');
+
+const calculate = (a, b, action) => {
+  const number1 = Number(a.replace(',', '.'));
+  const number2 = Number(b.replace(',', '.'));
+
+  switch (action) {
+    case '+': return number1 + number2;
+    case '-': return number1 - number2;
+    case '×': return number1 * number2;
+    case '/': return number1 / number2;
+  }
+}
+
+const initialState = {
+  input: '0',
+  memory: undefined,
+  action: undefined
+};
+
 class App extends React.Component {
-  state = { result: "" };
+  state = initialState;
 
-  onClick = button => {
+  onAction = action => {
+    const { input, memory } = this.state;
 
-    if(button === "=") {
-      this.calculate();
-    }
-
-    else if(button === "C") {
-      this.reset();
-    }
-
-    else if(button === "CE") {
-      this.backspace();
-    }
-
-    else if(this.state.result.length < 8) {
-      this.setState({
-        result: this.state.result + button
-      });
+    switch(action) {
+      case '+':
+      case '-':
+      case '/':
+      case '×':
+        this.setState({
+          action,
+          input: initialState.input,
+          memory: memory
+            ? formatNumber(calculate(memory, input, this.state.action))
+            : input
+        });
+        break;
+      case 'AC':
+        this.setState(initialState);
+        break;
+      case '±':
+        this.setState({
+          input: String(Number(this.state.input) * -1)
+        });
+        break;
+      case '=':
+        this.setState({
+          ...initialState,
+          input: formatNumber(calculate(memory, input, this.state.action))
+        });
     }
   };
 
-  calculate = () => {
-    try {
-      this.setState({
-        result: this.state.result || ""
-      })
-    } catch (e) {
-      this.setState({
-        result: "error"
-      });
+  onCharacter = value => {
+    const { input } = this.state;
+    let newInput = input;
+
+    if (input.length > 7) {
+      return;
     }
-  };
 
-  reset = () => {
-    this.setState({
-      result: ""
-    })
-  };
+    switch (value) {
+      case ',':
+        if (!input.includes(',')) {
+          newInput = input + ',';
+        }
+        break;
+      default:
+        newInput = input === '0'
+          ? value
+          : input + value;
+    }
 
-  backspace = () => {
-    this.setState({
-      result: this.state.result.slice(0, -1)
-    })
+    this.setState({ input: newInput });
   };
 
   render() {
     return (
       <div className={styles.wrapp}>
+        {this.state.memory}
         <span className={styles.resultDisplay}>
           <span className={styles.result}>
-            {this.state.result}
+            {this.state.input}
           </span>
         </span>
-        <KeyPadComponent onClick={this.onClick}/>
+        <KeyPad onAction={this.onAction} onCharacter={this.onCharacter} />
       </div>
     );
   }

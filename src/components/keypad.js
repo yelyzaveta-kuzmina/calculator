@@ -1,159 +1,139 @@
 import React from 'react';
+import { BUTTON_TYPE, PALETTE } from '../constants';
 import styles from './styles.module.scss';
 
+const BUTTONS = [
+  [
+    {
+      type: BUTTON_TYPE.Action,
+      value: 'AC',
+      color: PALETTE.Grey,
+    },
+    {
+      type: BUTTON_TYPE.Action,
+      value: '±',
+      color: PALETTE.Grey,
+    },
+    {
+      type: BUTTON_TYPE.Action,
+      value: '%',
+      color: PALETTE.Grey,
+    },
+    {
+      type: BUTTON_TYPE.Action,
+      value: '/',
+      color: PALETTE.Orange,
+    }
+  ],
+  [
+    {
+      type: BUTTON_TYPE.Character,
+      value: '1',
+      color: PALETTE.DarkGrey,
+    },
+    {
+      type: BUTTON_TYPE.Character,
+      value: '2',
+      color: PALETTE.DarkGrey,
+    },
+    {
+      type: BUTTON_TYPE.Character,
+      value: '3',
+      color: PALETTE.DarkGrey,
+    },
+    {
+      type: BUTTON_TYPE.Action,
+      value: '×',
+      color: PALETTE.Orange
+    }
+  ],
+  [
+    {
+      type: BUTTON_TYPE.Character,
+      value: '4',
+      color: PALETTE.DarkGrey
+    },
+    {
+      type: BUTTON_TYPE.Character,
+      value: '5',
+      color: PALETTE.DarkGrey
+    },
+    {
+      type: BUTTON_TYPE.Character,
+      value: '6',
+      color: PALETTE.DarkGrey
+    },
+    {
+      type: BUTTON_TYPE.Action,
+      value: '-',
+      color: PALETTE.Orange
+    }
+  ],
+  [
+    {
+      type: BUTTON_TYPE.Character,
+      value: '7',
+      color: PALETTE.DarkGrey
+    },
+    {
+      type: BUTTON_TYPE.Character,
+      value: '8',
+      color: PALETTE.DarkGrey
+    },
+    {
+      type: BUTTON_TYPE.Character,
+      value: '9',
+      color: PALETTE.DarkGrey
+    },
+    {
+      type: BUTTON_TYPE.Action,
+      value: '+',
+      color: PALETTE.Orange
+    }
+  ],
+  [
+    {
+      type: BUTTON_TYPE.Character,
+      value: '0',
+      color: PALETTE.DarkGrey,
+      className: styles.zeroButton
+    },
+    {
+      type: BUTTON_TYPE.Character,
+      value: ',',
+      color: PALETTE.DarkGrey
+    },
+    {
+      type: BUTTON_TYPE.Action,
+      value: '=',
+      color: PALETTE.Orange
+    },
+  ]
+];
 
-class KeyPadComponent extends React.Component {
-
-  render() {
-    return (
-      <div className={styles.buttonWrapper}>
-        <button 
-            className={styles.greyButton} 
-            name="AC" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            AC
-        </button>
-
-        <button 
-            className={styles.greyButton} 
-            name="CE" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            +/-
-        </button>
-
-        <button 
-            className={styles.greyButton} 
-            name="%" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            %
-         </button>
-
-        <button 
-            className={styles.orangeButton} 
-            name="÷" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            ÷
-        </button>
-        <br/>
-
-
-        <button
-            className={styles.darkGreyButton} 
-            name="1" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            1
-        </button>
-
-        <button
-            className={styles.darkGreyButton} 
-            name="2" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            2
-        </button>
-
-        <button
-            className={styles.darkGreyButton} 
-            name="3" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            3
-        </button>
-
-        <button
-            className={styles.orangeButton} 
-            name="x" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            x
-        </button><br/>
-
-
-
-        <button
-            className={styles.darkGreyButton}
-            name="4" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            4
-        </button>
-
-        <button
-            className={styles.darkGreyButton}
-            name="5" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            5
-        </button>
-
-        <button
-            className={styles.darkGreyButton}
-            name="6" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            6
-        </button>
-
-        <button   
-            className={styles.orangeButton} 
-            name="-" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            -
-        </button>
-        <br/>
-
-
-        <button
-            className={styles.darkGreyButton}
-            name="7" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            7
-        </button>
-
-        <button
-            className={styles.darkGreyButton}
-            name="8" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            8
-        </button>
-
-        <button
-            className={styles.darkGreyButton}
-            name="9" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            9
-        </button>
-
-        <button 
-            className={styles.orangeButton} 
-            name="+" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            +
-        </button>
-        <br/>
-
-
-        <button
-            className={styles.zeroButton}
-            name="0" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            0
-        </button>
-
-        <button
-            className={styles.darkGreyButton}
-            name="," 
-            onClick={e => this.props.onClick(e.target.name)}>
-            ,
-        </button>
-
-        <button
-            className={styles.orangeButton}
-            name="=" 
-            onClick={e => this.props.onClick(e.target.name)}>
-            =
-        </button>
-        <br/>
-
-        <div className={styles.homeButton} />
-
+const KeyPad = ({ onAction, onCharacter }) => (
+  <div className={styles.buttonWrapper}>
+    {BUTTONS.map((buttonsRow, index) => (
+      <div key={index} className={styles.buttonsRow}>
+        {buttonsRow.map(button => {
+          const onClick = button.type === BUTTON_TYPE.Action
+            ? () => onAction(button.value)
+            : () => onCharacter(button.value);
+          return (
+            <button
+              key={button.value}
+              style={{ backgroundColor: button.color }}
+              className={button.className}
+              onClick={onClick}>
+              {button.value}
+            </button>
+          );
+        })}
       </div>
-    );
-  }
-}
+    ))}
 
-export default KeyPadComponent;
+    <div className={styles.homeButton} />
+  </div>
+);
+
+export default KeyPad;
