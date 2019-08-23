@@ -1,24 +1,34 @@
-
-import React from 'react';
+import React from "react";
+import Time from "./components/time";
 import KeyPad from "./components/keypad";
-import styles from './styles.module.scss';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSignal,
+  faWifi,
+  faBatteryThreeQuarters
+} from "@fortawesome/free-solid-svg-icons";
+import styles from "./styles.module.scss";
 
-const formatNumber = number => String(number).replace('.', ',');
+const formatNumber = number => String(number).replace(".", ",");
 
 const calculate = (a, b, action) => {
-  const number1 = Number(a.replace(',', '.'));
-  const number2 = Number(b.replace(',', '.'));
+  const number1 = Number(a.replace(",", "."));
+  const number2 = Number(b.replace(",", "."));
 
   switch (action) {
-    case '+': return number1 + number2;
-    case '-': return number1 - number2;
-    case '×': return number1 * number2;
-    case '/': return number1 / number2;
+    case "+":
+      return number1 + number2;
+    case "-":
+      return number1 - number2;
+    case "×":
+      return number1 * number2;
+    case "/":
+      return number1 / number2;
   }
-}
+};
 
 const initialState = {
-  input: '0',
+  input: "0",
   memory: undefined,
   action: undefined
 };
@@ -29,11 +39,11 @@ class App extends React.Component {
   onAction = action => {
     const { input, memory } = this.state;
 
-    switch(action) {
-      case '+':
-      case '-':
-      case '/':
-      case '×':
+    switch (action) {
+      case "+":
+      case "-":
+      case "/":
+      case "×":
         this.setState({
           action,
           input: initialState.input,
@@ -42,15 +52,15 @@ class App extends React.Component {
             : input
         });
         break;
-      case 'AC':
+      case "AC":
         this.setState(initialState);
         break;
-      case '±':
+      case "±":
         this.setState({
           input: String(Number(this.state.input) * -1)
         });
         break;
-      case '=':
+      case "=":
         this.setState({
           ...initialState,
           input: formatNumber(calculate(memory, input, this.state.action))
@@ -67,15 +77,13 @@ class App extends React.Component {
     }
 
     switch (value) {
-      case ',':
-        if (!input.includes(',')) {
-          newInput = input + ',';
+      case ",":
+        if (!input.includes(",")) {
+          newInput = input + ",";
         }
         break;
       default:
-        newInput = input === '0'
-          ? value
-          : input + value;
+        newInput = input === "0" ? value : input + value;
     }
 
     this.setState({ input: newInput });
@@ -84,11 +92,23 @@ class App extends React.Component {
   render() {
     return (
       <div className={styles.wrapp}>
-        {this.state.memory}
-        <span className={styles.resultDisplay}>
-          <span className={styles.result}>
-            {this.state.input}
+        <div className={styles.header}>
+          <Time />
+          <span className={styles.rightSideSigns}>
+            <div className={styles.signal}>
+              <FontAwesomeIcon icon={faSignal} />
+            </div>
+            <div className={styles.wifi}>
+              <FontAwesomeIcon icon={faWifi} />
+            </div>
+            <div className={styles.battery}>
+              <FontAwesomeIcon icon={faBatteryThreeQuarters} />
+            </div>
           </span>
+        </div>
+        <span className={styles.resultDisplay}>
+          <span className={styles.accumulatorValue}>{this.state.memory}</span>
+          <span className={styles.result}>{this.state.input}</span>
         </span>
         <KeyPad onAction={this.onAction} onCharacter={this.onCharacter} />
       </div>
