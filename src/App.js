@@ -107,26 +107,28 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={styles.wrapp}>
-        <div className={styles.header}>
-          <Time />
-          <span className={styles.rightSideSigns}>
-            <div className={styles.signal}>
-              <FontAwesomeIcon icon={faSignal} />
-            </div>
-            <div className={styles.wifi}>
-              <FontAwesomeIcon icon={faWifi} />
-            </div>
-            <div className={styles.battery}>
-              <FontAwesomeIcon icon={faBatteryThreeQuarters} />
-            </div>
+      <div className={styles.wrapper}>
+        <div className={styles.phonesBody}>
+          <div className={styles.header}>
+            <Time />
+            <span className={styles.rightSideSigns}>
+              <div className={styles.signal}>
+                <FontAwesomeIcon icon={faSignal} />
+              </div>
+              <div className={styles.wifi}>
+                <FontAwesomeIcon icon={faWifi} />
+              </div>
+              <div className={styles.battery}>
+                <FontAwesomeIcon icon={faBatteryThreeQuarters} />
+              </div>
+            </span>
+          </div>
+          <span className={styles.resultDisplay}>
+            <span className={styles.accumulatorValue}>{this.state.memory}</span>
+            <span className={styles.result}>{this.state.input}</span>
           </span>
+          <KeyPad onAction={this.onAction} onCharacter={this.onCharacter} />
         </div>
-        <span className={styles.resultDisplay}>
-          <span className={styles.accumulatorValue}>{this.state.memory}</span>
-          <span className={styles.result}>{this.state.input}</span>
-        </span>
-        <KeyPad onAction={this.onAction} onCharacter={this.onCharacter} />
       </div>
     );
   }
