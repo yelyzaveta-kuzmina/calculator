@@ -109,6 +109,10 @@ class App extends React.Component {
     return (
       <div className={styles.wrapper}>
         <div className={styles.phonesBody}>
+          <div className={styles.upperheader}>
+            <div className={styles.dynamic} />
+            <div className={styles.circle} />
+          </div>
           <div className={styles.header}>
             <Time />
             <span className={styles.rightSideSigns}>
