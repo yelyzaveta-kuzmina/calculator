@@ -23,12 +23,11 @@ const calculate = (a, b, action) => {
     case "×":
       return number1 * number2;
     case "÷":
-      return number1 / number2;
+      return number1 / number2 || 0;
     case "%":
-      calculatePercentage(a, b);
-      break;
-    case "=":
-      return;
+      return calculatePercentage(a, b);
+    default:
+      return a;
   }
 };
 
@@ -88,7 +87,9 @@ class App extends React.Component {
       case "=":
         this.setState({
           ...initialState,
-          input: formatNumber(calculate(memory, input, this.state.action))
+          input: this.state.action
+            ? formatNumber(calculate(memory, input, this.state.action))
+            : this.state.input
         });
         break;
       case "%":
