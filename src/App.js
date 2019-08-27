@@ -18,11 +18,11 @@ const calculate = (a, b, action) => {
   switch (action) {
     case "+":
       return number1 + number2;
-    case "-":
+    case "−":
       return number1 - number2;
     case "×":
       return number1 * number2;
-    case "/":
+    case "÷":
       return number1 / number2;
     case "%":
       calculateProcantage(a, b);
@@ -52,8 +52,8 @@ class App extends React.Component {
 
     switch (action) {
       case "+":
-      case "-":
-      case "/":
+      case "−":
+      case "÷":
       case "×":
         this.setState({
           action,
@@ -79,7 +79,11 @@ class App extends React.Component {
         break;
       case "%":
         this.setState({
-          input: calculateProcantage(memory, input, this.state.action)
+          action,
+          input: initialState.input,
+          memory: formatNumber(
+            calculateProcantage(memory, input, this.state.action)
+          )
         });
     }
   };
