@@ -25,17 +25,31 @@ const calculate = (a, b, action) => {
     case "÷":
       return number1 / number2;
     case "%":
-      calculateProcantage(a, b);
+      calculatePercentage(a, b);
+      break;
+    case "=":
+      return;
   }
 };
 
-const calculateProcantage = (a, b) => {
+const calculatePercentage = (a, b, action) => {
   const number1 = Number(a.replace(",", "."));
   const number2 = Number(b.replace(",", "."));
   const number3 = number1 / 100;
   const number4 = number3 * number2;
 
-  return number1 - number4;
+  switch (action) {
+    case "+":
+      return number1 + number4;
+    case "−":
+      return number1 - number4;
+    case "×":
+      return number1 * (number2 / 100);
+    case "÷":
+      return number1 / (number2 / 100);
+    case "=":
+      return;
+  }
 };
 
 const initialState = {
@@ -79,11 +93,12 @@ class App extends React.Component {
         break;
       case "%":
         this.setState({
-          action,
           input: initialState.input,
-          memory: formatNumber(
-            calculateProcantage(memory, input, this.state.action)
-          )
+          memory: memory
+            ? formatNumber(
+                calculatePercentage(memory, input, this.state.action)
+              )
+            : input / 100
         });
     }
   };

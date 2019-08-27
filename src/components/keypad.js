@@ -28,17 +28,17 @@ const BUTTONS = [
   [
     {
       type: BUTTON_TYPE.Character,
-      value: "1",
+      value: "7",
       color: PALETTE.DarkGrey
     },
     {
       type: BUTTON_TYPE.Character,
-      value: "2",
+      value: "8",
       color: PALETTE.DarkGrey
     },
     {
       type: BUTTON_TYPE.Character,
-      value: "3",
+      value: "9",
       color: PALETTE.DarkGrey
     },
     {
@@ -72,17 +72,17 @@ const BUTTONS = [
   [
     {
       type: BUTTON_TYPE.Character,
-      value: "7",
+      value: "1",
       color: PALETTE.DarkGrey
     },
     {
       type: BUTTON_TYPE.Character,
-      value: "8",
+      value: "2",
       color: PALETTE.DarkGrey
     },
     {
       type: BUTTON_TYPE.Character,
-      value: "9",
+      value: "3",
       color: PALETTE.DarkGrey
     },
     {
